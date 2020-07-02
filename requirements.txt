@@ -1,1 +1,5 @@
 Django~=3.0.8
+flake8~=3.8.3
+markdown~=3.2.2
+djangorestframework~=3.11.0
+django-filter~=2.3.0
