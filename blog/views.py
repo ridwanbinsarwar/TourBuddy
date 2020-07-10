@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
-import blog.services
+from blog import services
 from .forms import PostForm
 
 
 # Create your views here.
 def post_list(request):
-    posts = blog.services.get_all_post()  # receives all post in json format
+    posts = services.get_all_post()  # receives all post in json format
     return render(request, 'post_list.html', {'posts': posts})
 
 
@@ -17,7 +17,7 @@ def new_post(request):
             post.author = request.user
             # post.published_date = timezone.now()
 
-            blog.services.upload_post(post)
+            services.upload_post(post)
 
     else:
         form = PostForm()
@@ -25,5 +25,10 @@ def new_post(request):
 
 
 def view_post(request, id):
-    post = blog.services.view_post_api(id)
+    post = services.view_post_api(id)
     return render(request, 'view_post.html', {'post': post})
+
+
+def delete_post(request, id):
+    response = services.delete_post_api(id)
+    return redirect('post_list')

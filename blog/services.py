@@ -29,3 +29,8 @@ def view_post_api(id):
     post = response.json()
     return post
 
+
+def delete_post_api(id):
+    url = 'http://127.0.0.1:8000/api/detail/%s' % id
+    response = requests.delete(url)
+    return response
