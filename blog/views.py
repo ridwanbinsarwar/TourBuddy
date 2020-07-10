@@ -9,7 +9,7 @@ def post_list(request):
     return render(request, 'post_list.html', {'posts': posts})
 
 
-def post_new(request):
+def new_post(request):
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
@@ -22,3 +22,8 @@ def post_new(request):
     else:
         form = PostForm()
     return render(request, 'create_post.html', {'form': form})
+
+
+def view_post(request, id):
+    post = blog.services.view_post_api(id)
+    return render(request, 'view_post.html', {'post': post})
