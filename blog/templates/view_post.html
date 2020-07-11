@@ -7,4 +7,6 @@
     <p>published: {{ post.published_date }}</p>
     <p>{{ post.text|linebreaksbr }}</p>
     <button type="submit" onclick="location.href='{% url 'delete_post' id=post.id %}'" class="save btn btn-default">delete</button>
+    <button type="submit" onclick="location.href='{% url 'update_post' id=post.id %}'" class="save btn btn-default">update</button>
+
 </div>

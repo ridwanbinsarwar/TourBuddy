@@ -34,3 +34,13 @@ def delete_post_api(id):
     url = 'http://127.0.0.1:8000/api/detail/%s' % id
     response = requests.delete(url)
     return response
+
+
+def update_post_api(post, id):
+    url = 'http://127.0.0.1:8000/api/detail/%s/' % id
+    data = json.loads(serializers.serialize('json', [post]))[0]
+    data = json.dumps(data)
+    # converting string to json
+    json_obj = json.loads(data)
+    response = requests.put(url,  json=json_obj["fields"])
+    return response

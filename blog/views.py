@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from blog import services
+from blog.models import Post
 from .forms import PostForm
 
 
@@ -32,3 +33,19 @@ def view_post(request, id):
 def delete_post(request, id):
     response = services.delete_post_api(id)
     return redirect('post_list')
+
+
+def update_post(request, id):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            response = services.update_post_api(post, id)
+            print(response)
+            return redirect('view_post', id=id)
+    else:
+        item = services.view_post_api(id)
+        print(type(item))
+        form = PostForm(item)
+    return render(request, 'update_post.html', {'form': form})
