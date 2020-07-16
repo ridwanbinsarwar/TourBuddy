@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from blog.models import Post
-from .serializers import PostSerializer
+from tourBuddyAPI.serializers import PostSerializer
 from rest_framework import status
 
 
@@ -52,3 +52,5 @@ class ArticleDetails(APIView):
         post = self.get_object(id)
         post.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+

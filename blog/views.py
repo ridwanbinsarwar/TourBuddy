@@ -19,6 +19,7 @@ def new_post(request):
             # post.published_date = timezone.now()
 
             services.upload_post(post)
+            return redirect('post_list')
 
     else:
         form = PostForm()
