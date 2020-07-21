@@ -5,14 +5,19 @@ from rest_framework.response import Response
 from blog.models import Post
 from tourBuddyAPI.serializers import PostSerializer
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 
 # Create your views here.
 
 # view to get all Post and add new Post
 class ArticleAPIView(APIView):
+    # permission_classes = (IsAuthenticated,)
+    # authentication_class = JSONWebTokenAuthentication
 
     def get(self, request):
+        print(request.data)
         posts = Post.objects.all()
         serializer = PostSerializer(posts, many='True')
         return Response(serializer.data)
@@ -52,5 +57,3 @@ class ArticleDetails(APIView):
         post = self.get_object(id)
         post.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-

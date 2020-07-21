@@ -5,7 +5,7 @@ import json
 from django.core import serializers
 
 
-def get_all_post():
+def get_all_post(token):
     url = 'http://127.0.0.1:8000/api/article/'
     r = requests.get(url)
     posts = r.json()

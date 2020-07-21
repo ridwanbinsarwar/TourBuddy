@@ -6,7 +6,8 @@ from .forms import PostForm
 
 # Create your views here.
 def post_list(request):
-    posts = services.get_all_post()  # receives all post in json format
+    posts = services.get_all_post(request.headers.get('Authorization'))  # receives all post in json format
+    print("---------------", posts, request.headers.get('Authorization'))
     return render(request, 'post_list.html', {'posts': posts})
 
 
