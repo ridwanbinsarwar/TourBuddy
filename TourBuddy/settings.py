@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'blog.apps.BlogConfig',
     'tourBuddyAPI',
-    # 'profiles.apps.ProfilesConfig'
+    'profiles.apps.ProfilesConfig'
 ]
 
 MIDDLEWARE = [

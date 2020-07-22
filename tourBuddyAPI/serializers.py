@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from blog.models import Post
-# from profiles.models import UserProfile
+from profiles.models import UserProfile
 from accounts.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import update_last_login
@@ -18,10 +18,10 @@ class PostSerializer(serializers.ModelSerializer):
         # use fields =[ 'name' ] for custom
 
 
-# class UserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = UserProfile
-#         fields = ('first_name', 'last_name', 'phone_number', 'age', 'gender')
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ('first_name', 'last_name', 'phone_number', 'age', 'gender')
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
