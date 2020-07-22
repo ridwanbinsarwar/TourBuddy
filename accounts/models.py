@@ -7,11 +7,6 @@ import uuid
 
 
 # Create your models here.
-class Account(models.Model):
-    email = models.EmailField(unique=True)
-    username = models.CharField(max_length=255, unique=True)
-    password = models.CharField(max_length=64, unique=False)
-
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
