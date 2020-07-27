@@ -1,27 +1,11 @@
 from rest_framework import serializers
-from blog.models import Post
-from profiles.models import UserProfile
 from accounts.models import User
 from django.contrib.auth import authenticate
-from django.contrib.auth.models import update_last_login
 from rest_framework_jwt.settings import api_settings
+from django.contrib.auth.models import update_last_login
 
 JWT_PAYLOAD_HANDLER = api_settings.JWT_PAYLOAD_HANDLER
 JWT_ENCODE_HANDLER = api_settings.JWT_ENCODE_HANDLER
-
-
-class PostSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Post
-        fields = '__all__'
-        # select every attribute of model
-        # use fields =[ 'name' ] for custom
-
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserProfile
-        fields = ('first_name', 'last_name', 'phone_number', 'age', 'gender')
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -45,6 +29,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
             email=self.validated_data['email'],
             password=self.validated_data['password']
         )
+
         return account
 
 

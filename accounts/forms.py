@@ -1,8 +1,10 @@
 # # accounts.forms.py
-# from django import forms
+from django import forms
 # from django.contrib.auth.forms import ReadOnlyPasswordHashField
 #
-# from .models import User
+from .models import User
+
+
 #
 #
 # class RegisterForm(forms.ModelForm):
@@ -74,3 +76,12 @@
 #         # This is done here, rather than on the field, because the
 #         # field does not have access to the initial value
 #         return self.initial["password"]
+class RegistrationForm(forms.ModelForm):
+
+    password2 = forms.CharField(label='Password confirmation')
+
+    class Meta:
+        model = User
+        fields = ('email', 'password', 'password2')
+
+
