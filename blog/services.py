@@ -7,7 +7,9 @@ from django.core import serializers
 
 def get_all_post(token):
     url = 'http://127.0.0.1:8000/api/article/'
-    r = requests.get(url)
+    headers = {'Authorization': token}
+
+    r = requests.get(url, headers=headers )
     posts = r.json()
     return posts
 
@@ -38,6 +40,7 @@ def delete_post_api(id):
 
 def update_post_api(post, id):
     url = 'http://127.0.0.1:8000/api/detail/%s/' % id
+    # converting obj to query obj and serialize
     data = json.loads(serializers.serialize('json', [post]))[0]
     data = json.dumps(data)
     # converting string to json

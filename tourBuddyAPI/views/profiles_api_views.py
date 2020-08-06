@@ -7,6 +7,7 @@ from rest_framework import status
 from tourBuddyAPI.serializers import UserProfileSerializer
 from rest_framework.response import Response
 from accounts.models import User
+import json
 
 
 class UserProfileView(APIView):
@@ -24,3 +25,18 @@ class UserProfileView(APIView):
         profile = self.get_object(user)
         serializer = UserProfileSerializer(profile)
         return Response(serializer.data)
+
+    def put(self, request):
+        user = User.objects.get(email=request.user)  # get user(accounts app)
+        profile = self.get_object(user)
+        serializer = UserProfileSerializer(profile, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request):
+        user = User.objects.get(email=request.user)  # get user(accounts app)
+        profile = self.get_object(user)
+        profile.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

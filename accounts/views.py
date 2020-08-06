@@ -48,5 +48,11 @@ def login_view(request):
                 }
         # api call method
         response = services.login_user_api(data)
-        print(response.status_code)
-        return redirect("login_view")
+        print(response.json())
+        if response.status_code != 400:
+            # authentication success
+            token = response.json()["token"]
+            request.session['token'] = token
+
+            return redirect("view_profile")
+    return redirect("login_view")

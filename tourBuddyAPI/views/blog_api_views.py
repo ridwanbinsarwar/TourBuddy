@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from blog.models import Post
 from tourBuddyAPI.serializers import PostSerializer
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 
@@ -13,8 +13,8 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 # view to get all Post and add new Post
 class ArticleAPIView(APIView):
-    # permission_classes = (IsAuthenticated,)
-    # authentication_class = JSONWebTokenAuthentication
+    permission_classes = (IsAuthenticated,)
+    authentication_class = JSONWebTokenAuthentication
 
     def get(self, request):
         print(request.data)
@@ -33,6 +33,7 @@ class ArticleAPIView(APIView):
 
 # view to get/update/delete specific post
 class ArticleDetails(APIView):
+    permission_classes = (AllowAny,)
 
     def get_object(self, id):
         try:

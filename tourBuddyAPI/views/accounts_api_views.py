@@ -4,7 +4,9 @@ from tourBuddyAPI.serializers import RegistrationSerializer, UserLoginSerializer
 from rest_framework import status
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.permissions import AllowAny
+from django.contrib import auth
 from profiles.models import UserProfile
+from accounts.models import User
 
 
 # view to get all Post and add new Post
@@ -40,5 +42,6 @@ class UserLoginView(RetrieveAPIView):
             'email': serializer.data['email'],
         }
         status_code = status.HTTP_200_OK
-
+        # if authentication is successful , get user object by email and login
+        # auth.login(request, User.objects.get(serializer.data['email']))
         return Response(response, status=status_code)

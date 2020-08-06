@@ -6,8 +6,22 @@ from .forms import PostForm
 
 # Create your views here.
 def post_list(request):
-    posts = services.get_all_post(request.headers.get('Authorization'))  # receives all post in json format
-    print("---------------", posts, request.headers.get('Authorization'))
+
+    if request.headers.get('Authorization') is None:
+        # request from browser
+        try:
+            token = request.session['token']
+            token = 'Bearer ' + token
+        except KeyError:
+            # user not logged in , redirect user to login page
+            return redirect('login_view')
+    else:
+        # request from Postman
+        token = request.headers.get('Authorization')
+
+    # receives all post in json format
+    posts = services.get_all_post(token)
+
     return render(request, 'post_list.html', {'posts': posts})
 
 
