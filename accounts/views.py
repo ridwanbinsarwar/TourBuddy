@@ -51,8 +51,11 @@ def login_view(request):
         print(response.json())
         if response.status_code != 400:
             # authentication success
+
             token = response.json()["token"]
+            email = response.json()["email"]
             request.session['token'] = token
+            request.session['user'] = email
 
             return redirect("view_profile")
     return redirect("login_view")

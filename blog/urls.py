@@ -9,4 +9,7 @@ urlpatterns = [
     path('update/<int:id>/', views.update_post, name='update_post'),
 
 
+    path('post_list_by_user/', views.post_list_by_user, name='post_list_by_user'),
+
+
 ]

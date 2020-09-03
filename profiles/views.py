@@ -26,7 +26,6 @@ def view_profile(request):
                 "gender": request.POST['gender'],
 
                 }
-        print(data)
         # change gender data format to make it api compatible
         data['gender'] = data['gender'][0]
         response = services.update_profile_api(json_data=data, token=token)
