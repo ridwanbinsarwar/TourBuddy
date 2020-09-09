@@ -1,6 +1,10 @@
 # TourBuddy
+TourBuddy is an application where users can arrange and manage tour. The project is currently on development.
 
-Below instruction is for Windown 10 :
+So far i have created Dajngo Rest Framework(DRF) for registration, login, profile and blog post.
+
+
+installation instruction for Windown 10 :
 
 0. Run cmd/powershell as Run As adminastrator
 1. Create virtual environment : python -m venv myvenv
